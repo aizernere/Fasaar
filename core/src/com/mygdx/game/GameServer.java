@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.MySQL.Account;
 import com.mygdx.game.Serverfiles.ServerPlayer;
 
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class GameServer {
         kryo.register(Entity.State.class);
         kryo.register(Vector3.class);
         kryo.register(String.class);
-
+        Thread account = new Thread(new Account());
+        account.start();
         server.addListener(new Listener() {
             @Override
             public void received(Connection connection, Object object) {
